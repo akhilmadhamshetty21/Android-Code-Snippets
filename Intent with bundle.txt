@@ -1,0 +1,40 @@
+Intent with Bundle:-
+
+Bundle extras=new Bundle();
+        try {
+            extras.putString("sender",jsonArray.getJSONObject(position).getString("sender_fname"));
+            extras.putString("subject",jsonArray.getJSONObject(position).getString("subject"));
+            extras.putString("message",jsonArray.getJSONObject(position).getString("message"));
+            extras.putString("date",jsonArray.getJSONObject(position).getString("created_at"));
+            Intent i1=new Intent(HomeScreenActivity.this,DisplayMailActivity.class);
+            i1.putExtras(extras);
+            startActivity(i1);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+   Intent intent=getIntent();
+        Bundle extras=intent.getExtras();
+        name.setText("Sender:"+extras.getString("sender"));
+        subject.setText("Subject:"+extras.getString("subject"));
+        message.setText("Message:"+extras.getString("message"));
+
+Intent with Serializable:-
+
+displayprofile.putExtra(USER_KEY,user);
+startActivity(displayprofile);
+
+    if(getIntent()!=null && getIntent().getExtras()!=null){
+            User user = (User) getIntent().getExtras().getSerializable(MainActivity.USER_KEY);
+            if(user.getGender().equals("Female")){
+                displayimage.setImageDrawable(getDrawable(R.drawable.female));
+            }
+            if(user.getGender().equals("Male")){
+                displayimage.setImageDrawable(getDrawable(R.drawable.male));
+            }
+
+            displayname.setText(user.getFirstname() + " " +user.getLastname());
+            displaygender.setText(user.getGender());
+        }

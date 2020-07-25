@@ -1,0 +1,26 @@
+MainActivity:-
+
+Intent toSelectAvatar= new Intent(MainActivity.this,selectAvatarActivity.class);
+startActivityForResult(toSelectAvatar,REQ_CODE);
+
+
+protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == REQ_CODE && resultCode == RESULT_OK && data != null) {
+            String gender = data.getExtras().getString(selectAvatarActivity.GENDER);
+
+            if (gender.equals("female")) {
+                imageView.setImageDrawable(getDrawable(R.drawable.female));
+                gen="Female";
+            } else {
+                imageView.setImageDrawable(getDrawable(R.drawable.male));
+                gen="Male";
+            }
+        }
+    }
+
+selectAvatarActivity.class
+	    Intent returnedData=new Intent();
+            returnedData.putExtra(GENDER, "female");
+            setResult(RESULT_OK,returnedData);
+            finish();
